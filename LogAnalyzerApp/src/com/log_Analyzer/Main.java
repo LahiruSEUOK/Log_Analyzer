@@ -9,25 +9,36 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        //Get file path from the user
-        Input input = new Input();
-        String filepath = input.getFilePath();
+        Scanner input = new Scanner(System.in);
+        int count = 0;
+        System.out.println("Enter file path: ");
+        String filepath = input.nextLine();
+        String lLine = getLastLine(count,filepath);
+        String timeStamp = getTimeStamp(lLine);
+        Scanner inputFilepath = new Scanner(new File(filepath));
 
-        //Read file
-        FileHandling fileHandling = new FileHandling();
-        List<String> lines=fileHandling.readFile(filepath);
 
-        //Find ERROR
-        fileHandling.findError(lines);
 
-        //Send emails
+        while(inputFilepath.hasNextLine())
+        {
+            String line = inputFilepath.nextLine();
+            count++;
+            String key = "ERROR";
+            String start = timeStamp;
+            if (line.contains(key)) {
+                System.out.println(line);
+            }
 
-        //Save last timestamp in a text file
-        fileHandling.writeFile(getTimeStamp(getLastLine(filepath)));
+        }
+
+        System.out.println(lLine);
+        getTimeStamp(lLine);
+
 
     }
 
-    static String getLastLine(String filepath) throws IOException {
+    static String getLastLine(int count, String filepath) throws IOException {
+        int n_lines = count;
         List<String> lines = Files.readAllLines(Paths.get(filepath));
         String result="";
         for (String line : lines){
@@ -44,7 +55,15 @@ public class Main {
         return timeStamp;
     }
 
-
+    public void writeFile(String text){
+        try {
+            FileWriter writer = new FileWriter("File.txt");
+            writer.write(timeStamp);
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     
 
 
