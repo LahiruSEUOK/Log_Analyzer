@@ -9,12 +9,15 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        Scanner input = new Scanner(System.in);
+        //Get file path from the user
+        Input input = new Input();
+        String filepath = input.getFilePath();
+
         int count = 0;
-        System.out.println("Enter file path: ");
-        String filepath = input.nextLine();
         String lLine = getLastLine(count,filepath);
         String timeStamp = getTimeStamp(lLine);
+
+        //
         Scanner inputFilepath = new Scanner(new File(filepath));
 
 
@@ -58,7 +61,7 @@ public class Main {
     public void writeFile(String text){
         try {
             FileWriter writer = new FileWriter("File.txt");
-            writer.write(timeStamp);
+            writer.write(text);
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
