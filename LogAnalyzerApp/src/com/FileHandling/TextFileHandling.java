@@ -1,4 +1,4 @@
-package FileHandling;
+package com.FileHandling;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public class TextFileHandling {
 
-    String filepath = "F:\\SENG21222 Project\\Log_Analyzer\\LogAnalyzerApp\\src\\Output\\output.txt";
+    String filepath = "F:\\SENG21222 Project\\Log_Analyzer\\LogAnalyzerApp\\src\\com\\Output\\output.txt";
 
     public void writeFile(String lLine){
         try {

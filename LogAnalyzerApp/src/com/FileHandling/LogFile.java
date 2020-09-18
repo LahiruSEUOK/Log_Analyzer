@@ -1,4 +1,4 @@
-package FileHandling;
+package com.FileHandling;
 
 import java.io.IOException;
 import java.text.ParseException;

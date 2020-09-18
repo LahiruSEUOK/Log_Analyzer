@@ -1,10 +1,11 @@
-package com.log_Analyzer;
+package com;
 
-import Errors.ErrorDetection;
-import FileHandling.LogFileHandling;
-import FileHandling.TextFileHandling;
-import Input.CmdInput;
-import Input.Input;
+import com.Errors.ErrorDetec;
+import com.Errors.ErrorDetection;
+import com.FileHandling.LogFileHandling;
+import com.FileHandling.TextFileHandling;
+import com.Input.CmdInput;
+import com.Input.Input;
 
 import java.io.*;
 import java.text.ParseException;
@@ -23,16 +24,16 @@ public class Main {
         List<String> lines= logFileHandling.readFile(filepath);
 
         //Find ERROR
-        ErrorDetection errorDetection = new ErrorDetection();
-        errorDetection.findError(lines);
+        Date timestamp = new Date();
+        ErrorDetec errorDetec = new ErrorDetection();
+        errorDetec.findError(timestamp,lines);
 
         //Send emails
 
 
         //Store last timestamp in a text file
         TextFileHandling textFileHandling = new TextFileHandling();
-        String lLine = logFileHandling.getLastLine(filepath);
-        textFileHandling.writeFile(lLine);
+        textFileHandling.writeFile(logFileHandling.getLastLine(filepath));
 
 
     }
