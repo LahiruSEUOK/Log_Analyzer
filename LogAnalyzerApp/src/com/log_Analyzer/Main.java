@@ -13,18 +13,17 @@ public class Main {
         Input input = new Input();
         String filepath = input.getFilePath();
 
-        String lLine = getLastLine(filepath);
-        String timeStamp = getTimeStamp(lLine);
-
         //Read file
         FileHandling fileHandling = new FileHandling();
         List<String> lines=fileHandling.readFile(filepath);
+
+        //Find ERROR
         fileHandling.findError(lines);
 
+        //Send emails
 
-        System.out.println(lLine);
-        getTimeStamp(lLine);
-
+        //Save last timestamp in a text file
+        fileHandling.writeFile(getTimeStamp(getLastLine(filepath)));
 
     }
 
@@ -45,15 +44,7 @@ public class Main {
         return timeStamp;
     }
 
-    public void writeFile(String text){
-        try {
-            FileWriter writer = new FileWriter("File.txt");
-            writer.write(text);
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+
     
 
 
