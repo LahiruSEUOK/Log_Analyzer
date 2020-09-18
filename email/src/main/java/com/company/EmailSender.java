@@ -1,4 +1,4 @@
-package com.company;
+package email.src.main.java.com.company;
 
 import java.io.File;
 import com.mashape.unirest.http.HttpResponse;

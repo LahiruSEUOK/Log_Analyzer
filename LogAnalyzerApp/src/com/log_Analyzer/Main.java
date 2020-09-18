@@ -1,5 +1,6 @@
 package com.log_Analyzer;
 
+import Errors.ErrorDetection;
 import FileHandling.LogFileHandling;
 import FileHandling.TextFileHandling;
 import Input.CmdInput;
@@ -21,12 +22,9 @@ public class Main {
         LogFileHandling logFileHandling = new LogFileHandling();
         List<String> lines= logFileHandling.readFile(filepath);
 
-        //Select lines to read
-        Date timestamp = new Date();
-        List<String> newLines = logFileHandling.getLinesToRead(timestamp,lines);
-
         //Find ERROR
-        logFileHandling.findError(newLines,filepath);
+        ErrorDetection errorDetection = new ErrorDetection();
+        errorDetection.findError(lines);
 
         //Send emails
 

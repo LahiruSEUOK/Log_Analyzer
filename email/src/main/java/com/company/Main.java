@@ -1,4 +1,4 @@
-package com.company;
+package email.src.main.java.com.company;
 
 import com.mashape.unirest.http.exceptions.UnirestException;
 
