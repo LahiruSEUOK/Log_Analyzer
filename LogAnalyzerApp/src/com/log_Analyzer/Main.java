@@ -17,22 +17,9 @@ public class Main {
         String lLine = getLastLine(count,filepath);
         String timeStamp = getTimeStamp(lLine);
 
-        //
-        Scanner inputFilepath = new Scanner(new File(filepath));
-
-
-
-        while(inputFilepath.hasNextLine())
-        {
-            String line = inputFilepath.nextLine();
-            count++;
-            String key = "ERROR";
-            String start = timeStamp;
-            if (line.contains(key)) {
-                System.out.println(line);
-            }
-
-        }
+        //Read file
+        FileHandling fileHandling = new FileHandling();
+        fileHandling.readFile(filepath);
 
         System.out.println(lLine);
         getTimeStamp(lLine);
