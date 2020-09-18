@@ -3,42 +3,43 @@ package com.log_Analyzer;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) throws IOException {
-        Scanner input = new Scanner(System.in);
-        int count = 0;
-        System.out.println("Enter file path: ");
-        String filepath = input.nextLine();
-        String lLine = getLastLine(count,filepath);
-        String timeStamp = getTimeStamp(lLine);
-        Scanner inputFilepath = new Scanner(new File(filepath));
+    public static void main(String[] args) throws IOException, ParseException {
+        //Get file path from the user
+        Input input = new Input();
+        String filepath = input.getFilePath();
+
+        //Read file
+        FileHandling fileHandling = new FileHandling();
+        List<String> lines=fileHandling.readFile(filepath);
 
 
+        //Select lines to read
+        Date timestamp = new Date();
+        List<String> newLines = getLinesToRead(timestamp,lines);
 
-        while(inputFilepath.hasNextLine())
-        {
-            String line = inputFilepath.nextLine();
-            count++;
-            String key = "ERROR";
-            String start = timeStamp;
-            if (line.contains(key)) {
-                System.out.println(line);
-            }
+        //Find ERROR
+        fileHandling.findError(newLines,filepath);
 
-        }
+        //Send emails
 
-        System.out.println(lLine);
-        getTimeStamp(lLine);
+
+        //Store last timestamp in a text file
+        String lLine = getLastLine(filepath);
+        fileHandling.writeFile(lLine);
 
 
     }
 
-    static String getLastLine(int count, String filepath) throws IOException {
-        int n_lines = count;
+    public static String getLastLine(String filepath) throws IOException {
         List<String> lines = Files.readAllLines(Paths.get(filepath));
         String result="";
         for (String line : lines){
@@ -49,22 +50,26 @@ public class Main {
         return result;
     }
 
-    static String getTimeStamp(String lLine){
-
-        String timeStamp = lLine.substring(0,19);
-        return timeStamp;
+    static Date getTimeStamp(String lLine) throws ParseException {
+        String[] Time = lLine.split("Z");
+        String[] Date = Time[0].split("T");
+        String timeStamp = Date[0]+" "+Date[1];
+        Date date = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss").parse(timeStamp);
+        return date;
     }
 
-    public void writeFile(String text){
-        try {
-            FileWriter writer = new FileWriter("File.txt");
-            writer.write(timeStamp);
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+    static List<String> getLinesToRead(Date timestamp, List<String> lines) throws ParseException, NullPointerException {
+        List<String> newLines = new ArrayList<>();
+        for (String line : lines){
+            Date time = getTimeStamp(line);
+            while(time.compareTo(timestamp)>0){
+                newLines.add(line);
+            }
         }
+        return newLines;
     }
-    
+
+
 
 
 
