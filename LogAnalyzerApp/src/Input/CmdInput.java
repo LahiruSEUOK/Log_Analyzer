@@ -1,7 +1,5 @@
 package Input;
 
-import com.log_Analyzer.Input;
-
 import java.util.Scanner;
 
 public class CmdInput implements Input{
