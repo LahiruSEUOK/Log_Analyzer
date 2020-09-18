@@ -13,13 +13,14 @@ public class Main {
         Input input = new Input();
         String filepath = input.getFilePath();
 
-        int count = 0;
-        String lLine = getLastLine(count,filepath);
+        String lLine = getLastLine(filepath);
         String timeStamp = getTimeStamp(lLine);
 
         //Read file
         FileHandling fileHandling = new FileHandling();
-        fileHandling.readFile(filepath);
+        List<String> lines=fileHandling.readFile(filepath);
+        fileHandling.findError(lines);
+
 
         System.out.println(lLine);
         getTimeStamp(lLine);
@@ -27,8 +28,7 @@ public class Main {
 
     }
 
-    static String getLastLine(int count, String filepath) throws IOException {
-        int n_lines = count;
+    static String getLastLine(String filepath) throws IOException {
         List<String> lines = Files.readAllLines(Paths.get(filepath));
         String result="";
         for (String line : lines){
