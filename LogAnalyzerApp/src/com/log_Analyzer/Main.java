@@ -36,11 +36,10 @@ public class Main {
             Time time=new SimpleTimeFormat("hh:mm:ss").parse(Time);
 
             while(date>startdate||(date=startdate && time>starttime)){
-            if (line.contains(key)) {
-                System.out.println(line);
+                if (line.contains(key)) {
+                    System.out.println(line);
+                }
             }
-
-        }
 
         System.out.println(lLine);
         getTimeStamp(lLine);
