@@ -8,7 +8,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Scanner;
 
 public class Main {
 
@@ -18,23 +17,23 @@ public class Main {
         String filepath = input.getFilePath();
 
         //Read file
-        FileHandling fileHandling = new FileHandling();
-        List<String> lines=fileHandling.readFile(filepath);
-
+        LogFileHandling logFileHandling = new LogFileHandling();
+        List<String> lines= logFileHandling.readFile(filepath);
 
         //Select lines to read
         Date timestamp = new Date();
         List<String> newLines = getLinesToRead(timestamp,lines);
 
         //Find ERROR
-        fileHandling.findError(newLines,filepath);
+        logFileHandling.findError(newLines,filepath);
 
         //Send emails
 
 
         //Store last timestamp in a text file
+        TextFileHandling textFileHandling = new TextFileHandling();
         String lLine = getLastLine(filepath);
-        fileHandling.writeFile(lLine);
+        textFileHandling.writeFile(lLine);
 
 
     }
