@@ -24,7 +24,18 @@ public class Main {
             String line = inputFilepath.nextLine();
             count++;
             String key = "ERROR";
-            String start = timeStamp;
+
+            String startDate = lLine.substring(0,9);
+            Date startdate=new SimpleDateFormat("yyyy-mm-dd").parse(startDate);
+            String startTime = lLine.substring(12,19);
+            Time starttime=new SimpleTimeFormat("hh:mm:ss").parse(startTime);
+
+            String Date = line.substring(0,9);
+            Date date=new SimpleDateFormat("yyyy-mm-dd").parse(Date);
+            String Time = line.substring(12,19);
+            Time time=new SimpleTimeFormat("hh:mm:ss").parse(Time);
+
+            while(date>startdate||(date=startdate && time>starttime)){
             if (line.contains(key)) {
                 System.out.println(line);
             }
