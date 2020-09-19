@@ -1,5 +1,5 @@
 package com.Input;
 
 public interface Input {
-    public String getFilePath();
+    public String getUserInput(String mail);
 }
