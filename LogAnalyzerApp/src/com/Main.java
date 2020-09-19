@@ -3,6 +3,7 @@ package com;
 import com.Errors.ErrorDetec;
 import com.Errors.ErrorDetection;
 import com.FileHandling.LogFileHandling;
+import com.FileHandling.TextFile;
 import com.FileHandling.TextFileHandling;
 import com.Input.CmdInput;
 import com.Input.Input;
@@ -17,7 +18,7 @@ public class Main {
     public static void main(String[] args) throws IOException, ParseException {
         //Get file path from the user
         Input input = new CmdInput();
-        String filepath = input.getFilePath();
+        String filepath = input.getUserInput();
 
         //Read file
         LogFileHandling logFileHandling = new LogFileHandling();
@@ -26,14 +27,14 @@ public class Main {
         //Find ERROR
         Date timestamp = new Date();
         ErrorDetec errorDetec = new ErrorDetection();
-        errorDetec.findError(timestamp,lines);
+        errorDetec.findError(lines);
 
         //Send emails
 
 
         //Store last timestamp in a text file
-        TextFileHandling textFileHandling = new TextFileHandling();
-        textFileHandling.writeFile(logFileHandling.getLastLine(filepath));
+        TextFile textFile = new TextFileHandling();
+        textFile.writeFile(logFileHandling.getLastLine(filepath));
 
 
     }
