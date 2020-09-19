@@ -7,16 +7,11 @@ import com.FileHandling.LogFileHandling;
 import com.FileHandling.TextFile;
 import com.FileHandling.TextFileHandling;
 import com.Input.CmdInput;
-import com.Input.EmailInput;
 import com.Input.Input;
-import com.dbConnection.AddOperation;
-import com.dbConnection.DataBaseConnection;
-import com.dbConnection.OperationFactory;
 import com.dbConnection.ReadEmail;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
-import java.io.*;
-import java.sql.Connection;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -56,13 +51,6 @@ public class Main {
                 unirestException.printStackTrace();
             }
         });
-
-//        String mail = " ";
-//        Input input= new EmailInput();
-//        String email = input.getUserInput(mail);
-//
-//        OperationFactory operationFactory = new AddOperation();
-//        operationFactory.perform(email);
 
 
 

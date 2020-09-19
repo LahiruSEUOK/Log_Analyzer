@@ -1,4 +1,6 @@
-package com.dbConnection;//package com.log_Analyzer;
+package com.dbConnection;
+
+//package com.log_Analyzer;
 //import java.sql.Connection;
 //import java.sql.DriverManager;
 //import java.sql.ResultSet;
