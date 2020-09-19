@@ -27,11 +27,12 @@ public class LogFileHandling implements LogFile{
         return result;
     }
 
-    public List<String> getLinesToRead(Date timeStamp, List<String> lines) throws ParseException, NullPointerException {
+    public List<String> getLinesToRead(List<String> lines,String lLine) throws ParseException, NullPointerException {
+        Date timeStamp = getTimeStamp(lLine);
         List<String> newLines = new ArrayList<>();
         for (String line : lines){
             Date time = getTimeStamp(line);
-            while(time.compareTo(timeStamp)>0){
+            if(time.compareTo(timeStamp)>0){
                 newLines.add(line);
             }
         }

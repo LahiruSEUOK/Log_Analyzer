@@ -21,30 +21,31 @@ public class Main {
 
     public static void main(String[] args) throws IOException, ParseException, SQLException, ClassNotFoundException {
         //Get file path from the user
-//        Input input = new CmdInput();
-//        String filepath = input.getUserInput();
-//
-//        //Read file
-//        LogFileHandling logFileHandling = new LogFileHandling();
-//        List<String> lines= logFileHandling.readFile(filepath);
-//
-//        //Find ERROR
-//        Date timestamp = new Date();
-//        ErrorDetec errorDetec = new ErrorDetection();
-//        errorDetec.findError(lines);
-//
-//        //Send emails
-//
-//
-//        //Store last timestamp in a text file
-//        TextFile textFile = new TextFileHandling();
-//        textFile.writeFile(logFileHandling.getLastLine(filepath));
-        String mail = " ";
-        Input input= new EmailInput();
-        String email = input.getUserInput(mail);
+        Input input = new CmdInput();
+        String filepath = input.getUserInput();
 
-        OperationFactory operationFactory = new AddOperation();
-        operationFactory.perform(email);
+        //Read file
+        LogFileHandling logFileHandling = new LogFileHandling();
+        List<String> lines= logFileHandling.readFile(filepath);
+
+        //Find ERROR
+        Date timestamp = new Date();
+        ErrorDetec errorDetec = new ErrorDetection();
+        errorDetec.findError(lines);
+
+        //Send emails
+
+
+        //Store last timestamp in a text file
+        TextFile textFile = new TextFileHandling();
+        textFile.writeFile(logFileHandling.getLastLine(filepath));
+
+//        String mail = " ";
+//        Input input= new EmailInput();
+//        String email = input.getUserInput(mail);
+//
+//        OperationFactory operationFactory = new AddOperation();
+//        operationFactory.perform(email);
 
 
     }

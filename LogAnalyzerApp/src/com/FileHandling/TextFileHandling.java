@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class TextFileHandling {
+public class TextFileHandling implements TextFile{
 
     String filepath = "F:\\SENG21222 Project\\Log_Analyzer\\LogAnalyzerApp\\src\\com\\Output\\output.txt";
 
