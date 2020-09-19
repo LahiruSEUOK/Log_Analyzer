@@ -1,19 +1,20 @@
 package com;
 
+import com.EmailRepository.EmailSender;
 import com.Errors.ErrorDetec;
 import com.Errors.ErrorDetection;
 import com.FileHandling.LogFileHandling;
 import com.FileHandling.TextFile;
 import com.FileHandling.TextFileHandling;
 import com.Input.CmdInput;
-import com.Input.EmailInput;
 import com.Input.Input;
-import com.dbConnection.AddOperation;
-import com.dbConnection.OperationFactory;
+import com.dbConnection.ReadEmail;
+import com.mashape.unirest.http.exceptions.UnirestException;
 
 import java.io.*;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -40,12 +41,17 @@ public class Main {
         TextFile textFile = new TextFileHandling();
         textFile.writeFile(logFileHandling.getLastLine(filepath));
 
-//        String mail = " ";
-//        Input input= new EmailInput();
-//        String email = input.getUserInput(mail);
-//
-//        OperationFactory operationFactory = new AddOperation();
-//        operationFactory.perform(email);
+        ReadEmail readEmail = new ReadEmail();
+        ArrayList<String> mailList = readEmail.getMailList();
+        EmailSender emailSender = new EmailSender();
+        mailList.forEach((e) -> {
+            try {
+                emailSender.sendSimpleMessage(e);
+            } catch (UnirestException unirestException) {
+                unirestException.printStackTrace();
+            }
+        });
+
 
 
     }
