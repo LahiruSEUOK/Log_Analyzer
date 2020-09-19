@@ -36,15 +36,17 @@ public class DataBaseConnection {
     private Connection connection;
     private static DataBaseConnection dBConnection;
     DataBaseConnection() throws ClassNotFoundException, SQLException{
-        Class.forName("com.mysql.jdbc.Driver");
-        connection=DriverManager.getConnection("jdbc:mysql://localhost:3306/emailrepository", "root", " ");
+        Class.forName("com.mariadb.jdbc.Driver");
+        connection=DriverManager.getConnection("jdbc:mariadb://localhost:3306/emails", "root", " ");
     }
+
     static DataBaseConnection getInstance() throws ClassNotFoundException, SQLException{
         if(dBConnection==null){
             dBConnection=new DataBaseConnection();
         }
         return dBConnection;
     }
+
     Connection getConnection(){
         return connection;
     }

@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public class TextFileHandling implements TextFile{
 
-    String filepath = "F:\\SENG21222 Project\\Log_Analyzer\\LogAnalyzerApp\\src\\com\\Output\\output.txt";
+    String filepath = "LogAnalyzerApp/src/com/Output/output.txt";
 
     public void writeFile(String lLine){
         try {
