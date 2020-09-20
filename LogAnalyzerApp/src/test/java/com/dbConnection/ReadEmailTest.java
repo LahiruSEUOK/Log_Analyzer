@@ -8,6 +8,6 @@ public class ReadEmailTest {
     @Test
     public void shold_return_emailList() {
         ReadEmail read = new ReadEmail();
-        String result = read.getString();
+
     }
 }
