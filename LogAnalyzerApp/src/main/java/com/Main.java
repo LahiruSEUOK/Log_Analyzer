@@ -1,21 +1,18 @@
 package com;
 
-import Log_Analyzer.LogAnalyzerApp.src.com.FileHandling.LogFileHandling;
-import com.EmailRepository.EmailSender;
+import com.EmailRepository.EmailFactory;
 import com.Errors.ErrorDetec;
 import com.Errors.ErrorDetection;
+import com.FileHandling.LogFile;
+import com.FileHandling.LogFileHandling;
 import com.FileHandling.TextFile;
 import com.FileHandling.TextFileHandling;
 import com.Input.CmdInput;
 import com.Input.Input;
-import com.dbConnection.ReadEmail;
-import com.mashape.unirest.http.exceptions.UnirestException;
 
-import java.io.*;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class Main {
@@ -26,33 +23,20 @@ public class Main {
         String filepath = input.getUserInput();
 
         //Read file
-        LogFileHandling logFileHandling = new LogFileHandling();
-        List<String> lines= logFileHandling.readFile(filepath);
+        LogFile logFile = new LogFileHandling();
+        List<String> lines= logFile.readFile(filepath);
 
         //Find ERROR
-        Date timestamp = new Date();
         ErrorDetec errorDetec = new ErrorDetection();
-        errorDetec.findError(lines);
+        List<String> ErrorMessage = errorDetec.findError(lines);
 
         //Send emails
-
+        EmailFactory emailFactory = new EmailFactory();
+        emailFactory.sendEmails(ErrorMessage);
 
         //Store last timestamp in a text file
         TextFile textFile = new TextFileHandling();
-        textFile.writeFile(logFileHandling.getLastLine(filepath));
-
-        ReadEmail readEmail = new ReadEmail();
-        ArrayList<String> mailList = readEmail.getMailList();
-        EmailSender emailSender = new EmailSender();
-        mailList.forEach((e) -> {
-            try {
-                emailSender.sendSimpleMessage(e);
-            } catch (UnirestException unirestException) {
-                unirestException.printStackTrace();
-            }
-        });
-
-
+        textFile.writeFile(logFile.getLastLine(filepath));
 
     }
 

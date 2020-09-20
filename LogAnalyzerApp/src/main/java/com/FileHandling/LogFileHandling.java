@@ -1,6 +1,4 @@
-package Log_Analyzer.LogAnalyzerApp.src.com.FileHandling;
-
-import Log_Analyzer.LogAnalyzerApp.src.com.FileHandling.LogFile;
+package com.FileHandling;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -11,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class LogFileHandling implements LogFile {
+public class LogFileHandling implements LogFile{
 
     public List<String> readFile(String filepath) throws IOException {
         List<String> lines = Files.readAllLines(Paths.get(filepath));
@@ -29,15 +27,25 @@ public class LogFileHandling implements LogFile {
         return result;
     }
 
-    public List<String> getLinesToRead(List<String> lines,String lLine) throws ParseException, NullPointerException {
-        Date timeStamp = getTimeStamp(lLine);
+    public List<String> getLinesToRead(List<String> lines,String filepath) throws ParseException, NullPointerException, IOException {
+        TextFile textFile = new TextFileHandling();
+        String lastTime = textFile.readFile(filepath);
         List<String> newLines = new ArrayList<>();
-        for (String line : lines){
-            Date time = getTimeStamp(line);
-            if(time.compareTo(timeStamp)>0){
-                newLines.add(line);
+        if (lastTime!=null){
+            String[] time = lastTime.split("T");
+            String date = time[0]+" "+time[1];
+            Date timeStamp = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss").parse(date);
+
+            for (String line : lines){
+                Date timestamp = getTimeStamp(line);
+                if(timestamp.compareTo(timeStamp)>0){
+                    newLines.add(line);
+                }
             }
+        }else{
+            newLines = lines;
         }
+//        System.out.println(newLines);
         return newLines;
     }
 
