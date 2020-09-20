@@ -28,6 +28,9 @@ SET time_zone = "+00:00";
 -- Table structure for table `email`
 --
 
+
+drop database if exists emails;
+create database emails;
 CREATE TABLE `email` (
   `Email` varchar(150) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -41,7 +44,8 @@ INSERT INTO `email` (`Email`) VALUES
 ('cmaduwanthi123@gmail.com'),
 ('cmaduwanthi123@gmail.com'),
 ('seneshathilakarthne@gmail.com'),
-('seneshathilakarthne@gmail.com');
+('seneshathilakarthne@gmail.com'),
+('lahirusandeepa22@gmail.com');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
